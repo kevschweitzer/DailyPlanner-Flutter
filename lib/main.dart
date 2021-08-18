@@ -1,3 +1,4 @@
+import 'package:dailyplanner/new_task.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,7 +9,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Daily Planner",
       home: DailyPlanningScreen()
     );
   }
@@ -35,9 +35,15 @@ class DailyPlanningState extends State<DailyPlanningScreen> {
     );
   }
 
-  void _addNewTask() {
+  Future<void> _addNewTask() async {
+    final newTaskName = await Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return NewTask();
+        })
+    );
     setState(() {
-      tasksList.add("New Task 2");
+      tasksList.add(newTaskName);
     });
   }
 
