@@ -37,7 +37,7 @@ class DailyPlanningState extends State<DailyPlanningScreen> {
 
   void _addNewTask() {
     setState(() {
-      tasksList.add("New Task");
+      tasksList.add("New Task 2");
     });
   }
 
