@@ -58,7 +58,48 @@ class DailyPlanningState extends State<DailyPlanningScreen> {
 
   Widget _buildRow(String task) {
     return ListTile(
-        title: Text(task)
+        title: Text(task),
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          onPressed: () {
+            _removeTask(task);
+          },
+        )
+    );
+  }
+
+  void _removeTask(String task) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Delete task'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Are you sure you want to delete the task?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Approve'),
+                onPressed: () {
+                  setState(() {
+                    tasksList.removeWhere((element) => element == task);
+                  });
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        }
     );
   }
 }
